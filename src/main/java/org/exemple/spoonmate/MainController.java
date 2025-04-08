@@ -31,4 +31,9 @@ public class MainController {
         Node page = FXMLLoader.load(getClass().getResource(fxml));
         contentArea.getChildren().setAll(page);
     }
+
+    @FXML
+    public void showLogin() throws IOException {
+        loadPage("login-view.fxml");
+    }
 }
