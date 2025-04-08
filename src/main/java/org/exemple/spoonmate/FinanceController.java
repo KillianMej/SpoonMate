@@ -33,6 +33,24 @@ public class FinanceController {
         recettes.add(1200.0);
         recettes.add(850.0);
         recettes.add(430.0);
+        recettes.add(1200.0);
+        recettes.add(850.0);
+        recettes.add(430.0);
+        recettes.add(1200.0);
+        recettes.add(850.0);
+        recettes.add(430.0);
+        recettes.add(1200.0);
+        recettes.add(850.0);
+        recettes.add(430.0);
+        recettes.add(1200.0);
+        recettes.add(850.0);
+        recettes.add(430.0);
+        recettes.add(1200.0);
+        recettes.add(850.0);
+        recettes.add(430.0);
+        recettes.add(1200.0);
+        recettes.add(850.0);
+        recettes.add(430.0);
 
         depenses.add(500.0);
         depenses.add(300.0);
