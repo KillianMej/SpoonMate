@@ -12,6 +12,7 @@
             <Button text="Finances" onAction="#showFinance"/>
             <Button text="Dashboard" onAction="#showDashboard"/>
             <Button text="login-view" onAction="#showLogin"/>
+            <Button text="register-view" onAction="#showRegister"/>
         </HBox>
     </top>
 
