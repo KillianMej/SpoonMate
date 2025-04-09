@@ -92,4 +92,19 @@ public class Database {
                 "Values('"+nom+"', '"+email+"', '"+mdp+"', 1)";
         doQuery(sql);
     }
+
+
+    public void ajouterRecette(int restau_id, String desc, double montant, String date) {
+        String sql = "INSERT INTO Depenses_Recettes (restau_id, type, desc, montant, date) VALUES (" +
+                restau_id + ", 1, '" + desc + "', " + montant + ", '" + date + "')";
+        doQuery(sql);
+    }
+    
+    public void ajouterDepense(int restau_id, String desc, double montant, String date) {
+        String sql = "INSERT INTO Depenses_Recettes (restau_id, type, desc, montant, date) VALUES (" +
+                restau_id + ", 0, '" + desc + "', " + montant + ", '" + date + "')";
+        doQuery(sql);
+    }
+    
+
 }

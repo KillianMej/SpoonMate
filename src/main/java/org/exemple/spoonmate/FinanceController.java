@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,33 +34,31 @@ public class FinanceController {
 
     @FXML
     public void initialize() {
-        recettes.add(1200.0);
-        recettes.add(850.0);
-        recettes.add(430.0);
-        recettes.add(1200.0);
-        recettes.add(850.0);
-        recettes.add(430.0);
-        recettes.add(1200.0);
-        recettes.add(850.0);
-        recettes.add(430.0);
-        recettes.add(1200.0);
-        recettes.add(850.0);
-        recettes.add(430.0);
-        recettes.add(1200.0);
-        recettes.add(850.0);
-        recettes.add(430.0);
-        recettes.add(1200.0);
-        recettes.add(850.0);
-        recettes.add(430.0);
-        recettes.add(1200.0);
-        recettes.add(850.0);
-        recettes.add(430.0);
-
-        depenses.add(500.0);
-        depenses.add(300.0);
-        depenses.add(250.0);
-
+        loadDataFromDatabase();
         updateUI();
+    }
+
+    private void loadDataFromDatabase() {
+        String url = "jdbc:sqlite:database.db";
+        String sqlRecettes = "SELECT montant FROM Depenses_Recettes WHERE type = 1";
+        String sqlDepenses = "SELECT montant FROM Depenses_Recettes WHERE type = 0";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+
+            ResultSet rsRecettes = stmt.executeQuery(sqlRecettes);
+            while (rsRecettes.next()) {
+                recettes.add(rsRecettes.getDouble("montant"));
+            }
+
+            ResultSet rsDepenses = stmt.executeQuery(sqlDepenses);
+            while (rsDepenses.next()) {
+                depenses.add(rsDepenses.getDouble("montant"));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void updateUI() {

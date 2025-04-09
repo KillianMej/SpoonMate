@@ -19,6 +19,15 @@ public class Finance extends Application {
         Database db = new Database();
         db.creationDb();
         db.creationUtil("jean", "pierre","eds");
+
+        db.ajouterRecette(1, "Vente de plat", 1200.0, "2023-10-01");
+        db.ajouterRecette(1, "Vente de boisson", 850.0, "2023-10-02");
+        db.ajouterRecette(1, "Vente de dessert", 430.0, "2023-10-03");
+
+        db.ajouterDepense(1, "Achat de matières premières", 500.0, "2023-10-01");
+        db.ajouterDepense(1, "Salaire employé", 300.0, "2023-10-02");
+        db.ajouterDepense(1, "Loyer", 250.0, "2023-10-03");
+
         launch();
     }
 }
