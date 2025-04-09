@@ -75,6 +75,22 @@ public class ManageTablesController {
     }
 
     @FXML
+    protected void openDisplayTablesModal() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("displayTablesModalView.fxml"));
+
+            Stage modale = new Stage();
+            modale.initModality(Modality.APPLICATION_MODAL);
+            modale.setTitle("Gestion des tables");
+            modale.setScene(new Scene(root, 400, 300));
+            modale.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     protected void assignTableSubmit() {
         String tableName = assignTableId.getText();
         System.out.println("Valeur du champ est " + tableName);
@@ -94,5 +110,11 @@ public class ManageTablesController {
         String sizeTable = seatsAmountId.getText();
         System.out.println("Valeur du champ est " + locationName);
         resultLabel.setText("Table à créer : secteur " + locationName + " et " + sizeTable + " places." );
+    }
+
+    @FXML
+    protected void displayTableSubmit() {
+        System.out.println("Voici la liste des tables : ");
+        resultLabel.setText("Voici la liste des tables disponibles:" );
     }
 }

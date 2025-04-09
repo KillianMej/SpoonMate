@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -19,25 +18,26 @@
       <RowConstraints fillHeight="false" maxHeight="1112.0" minHeight="10.0" prefHeight="960.4000106811524" valignment="CENTER" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <VBox fx:id="assignMenu" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="327.0" spacing="20.0" GridPane.halignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0" prefWidth="546.0" spacing="20.0" GridPane.halignment="CENTER">
           <padding>
               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
           </padding>
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                <Button fx:id="assignTableBtn" mnemonicParsing="false" onAction="#openAssignTablesModal" text="Assigner" />
-                  <Button fx:id="freeTableBtn" mnemonicParsing="false" onAction="#openFreeTablesModal" text="Libérer" />
-                  <Button fx:id="createTableBtn" mnemonicParsing="false" onAction="#openCreateTablesModal" text="Enregistrer" />
-                  <Button fx:id="displayTableBtn" mnemonicParsing="false" onAction="#openDisplayTablesModal" text="Afficher" />
-              </items>
-            </ToolBar>
-             <Label>
+            <Label text="Afficher tables libres">
                <font>
                   <Font size="44.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" spacing="100.0" />
+            <HBox alignment="CENTER" spacing="100.0">
+               <children>
+                  <Button fx:id="displayTableSubmitBtn" mnemonicParsing="false" onAction="#displayTableSubmit" text="Valider" textOverrun="CLIP" />
+               </children>
+            </HBox>
+            <Label fx:id="resultLabel" prefHeight="91.0" prefWidth="441.0">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </children>
