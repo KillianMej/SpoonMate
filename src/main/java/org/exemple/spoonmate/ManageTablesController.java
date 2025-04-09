@@ -11,7 +11,11 @@ import javafx.stage.Stage;
 
 public class ManageTablesController {
     //@FXML
+    @FXML
+    private TextField assignTableId;
 
+    @FXML
+    private Label resultLabel;
 
     @FXML
     protected void openAssignTablesModal() {
@@ -29,18 +33,11 @@ public class ManageTablesController {
         }
     }
 
+
     @FXML
-    protected void assignTable() {
-        @FXML
-        private TextField assignTableId;
-
-        @FXML
-        private Label resultLabel;
-
-        @FXML
-        private void assignTableSubmit() {
-            String tableName = assignTableId.getText();
-            resultLabel.setText("Table assignée : " + tableName + " !");
-        }
+    protected void assignTableSubmit() {
+        String tableName = assignTableId.getText();
+        System.out.println("Valeur du champ est " + tableName);
+        resultLabel.setText("Table assignée : " + tableName + " !");
     }
 }
