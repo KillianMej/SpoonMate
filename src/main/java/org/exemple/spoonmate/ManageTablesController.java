@@ -18,6 +18,12 @@ public class ManageTablesController {
     private TextField freeTableId;
 
     @FXML
+    private TextField locationTableId;
+
+    @FXML
+    private TextField seatsAmountId;
+
+    @FXML
     private Label resultLabel;
 
     @FXML
@@ -52,6 +58,21 @@ public class ManageTablesController {
         }
     }
 
+    @FXML
+    protected void openCreateTablesModal() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("createTablesModalView.fxml"));
+
+            Stage modale = new Stage();
+            modale.initModality(Modality.APPLICATION_MODAL);
+            modale.setTitle("Gestion des tables");
+            modale.setScene(new Scene(root, 400, 300));
+            modale.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     protected void assignTableSubmit() {
@@ -65,5 +86,13 @@ public class ManageTablesController {
         String tableName = freeTableId.getText();
         System.out.println("Valeur du champ est " + tableName);
         resultLabel.setText("Table libérée : " + tableName + " !");
+    }
+
+    @FXML
+    protected void createTableSubmit() {
+        String locationName = locationTableId.getText();
+        String sizeTable = seatsAmountId.getText();
+        System.out.println("Valeur du champ est " + locationName);
+        resultLabel.setText("Table à créer : secteur " + locationName + " et " + sizeTable + " places." );
     }
 }

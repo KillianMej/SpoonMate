@@ -28,7 +28,7 @@
               <items>
                 <Button fx:id="assignTableBtn" mnemonicParsing="false" onAction="#openAssignTablesModal" text="Assigner" />
                   <Button fx:id="freeTableBtn" mnemonicParsing="false" onAction="#openFreeTablesModal" text="Libérer" />
-                  <Button mnemonicParsing="false" text="Enregistrer" />
+                  <Button fx:id="createTableBtn" mnemonicParsing="false" onAction="#openCreateTablesModal" text="Enregistrer" />
                   <Button mnemonicParsing="false" text="Afficher" />
               </items>
             </ToolBar>
