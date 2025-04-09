@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -18,12 +20,27 @@ public class ManageTablesController {
 
             Stage modale = new Stage();
             modale.initModality(Modality.APPLICATION_MODAL);
-            modale.setTitle("Ma Grande Modale");
+            modale.setTitle("Gestion des tables");
             modale.setScene(new Scene(root, 400, 300));
             modale.showAndWait();
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void assignTableSubmit() {
+        @FXML
+        private TextField assignTableId;
+
+        @FXML
+        private Label resultLabel;
+
+        @FXML
+        private void handleSubmit() {
+            String tableName = assignTableId.getText();
+            resultLabel.setText("Table assignée : " + tableName + " !");
         }
     }
 }
