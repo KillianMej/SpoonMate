@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.exemple.spoonmate.CommandesController">
+   <top>
+          <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Liste des Commandes" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <ScrollPane BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                      <VBox fx:id="commandesBox" spacing="10" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </center>
+   <bottom>
+          <Button onAction="#onAjouterCommande" text="Ajouter une commande" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

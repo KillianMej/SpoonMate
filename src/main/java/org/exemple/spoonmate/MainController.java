@@ -41,4 +41,9 @@ public class MainController {
     public void showRegister() throws IOException {
         loadPage("registerView.fxml");
     }
+
+    @FXML
+    public void showCommandes() throws IOException {
+        loadPage("commandes.fxml");
+    }
 }

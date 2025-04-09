@@ -13,6 +13,7 @@
             <Button text="Dashboard" onAction="#showDashboard"/>
             <Button text="LoginView" onAction="#showLogin"/>
             <Button text="RegisterView" onAction="#showRegister"/>
+            <Button text="Commandes" onAction="#showCommandes"/>
             </HBox>
     </top>
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.exemple.spoonmate.AjouterCommandeController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label text="Nouvelle Commande" style="-fx-font-size: 16px;"/>
+
+    <ComboBox fx:id="platComboBox" promptText="Choisir un plat"/>
+    <ComboBox fx:id="tableComboBox" promptText="Choisir une table"/>
+
+    <Button text="Ajouter" onAction="#onAjouter"/>
+</VBox>
