@@ -30,7 +30,7 @@ public class ManageTablesController {
     }
 
     @FXML
-    protected void assignTableSubmit() {
+    protected void assignTable() {
         @FXML
         private TextField assignTableId;
 
@@ -38,7 +38,7 @@ public class ManageTablesController {
         private Label resultLabel;
 
         @FXML
-        private void handleSubmit() {
+        private void assignTableSubmit() {
             String tableName = assignTableId.getText();
             resultLabel.setText("Table assignée : " + tableName + " !");
         }
