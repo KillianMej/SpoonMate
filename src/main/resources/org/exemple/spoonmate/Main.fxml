@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="org.exemple.spoonmate.MainController">
+
+    <top>
+        <HBox spacing="10" style="-fx-padding: 10; -fx-background-color: #eeeeee;">
+            <Button text="Finances" onAction="#showFinance"/>
+            <Button text="Dashboard" onAction="#showDashboard"/>
+            <Button text="LoginView" onAction="#showLogin"/>
+            <Button text="RegisterView" onAction="#showRegister"/>
+            </HBox>
+    </top>
+
+    <center>
+        <StackPane fx:id="contentArea"/>
+    </center>
+
+</BorderPane>
