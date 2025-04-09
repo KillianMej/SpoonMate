@@ -34,11 +34,11 @@ public class MainController {
 
     @FXML
     public void showLogin() throws IOException {
-        loadPage("login-view.fxml");
+        loadPage("loginView.fxml");
     }
 
     @FXML
     public void showRegister() throws IOException {
-        loadPage("register-view.fxml");
+        loadPage("registerView.fxml");
     }
 }
