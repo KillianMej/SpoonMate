@@ -43,6 +43,6 @@ public class MainController {
     }
 
     public void showTables() throws IOException {
-        loadPage("managetables-view.fxml");
+        loadPage("manageTablesView.fxml");
     }
 }

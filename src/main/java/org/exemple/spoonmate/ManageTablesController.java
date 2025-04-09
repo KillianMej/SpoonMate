@@ -15,12 +15,31 @@ public class ManageTablesController {
     private TextField assignTableId;
 
     @FXML
+    private TextField freeTableId;
+
+    @FXML
     private Label resultLabel;
 
     @FXML
     protected void openAssignTablesModal() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("AssignTablesModal-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("assignTablesModalView.fxml"));
+
+            Stage modale = new Stage();
+            modale.initModality(Modality.APPLICATION_MODAL);
+            modale.setTitle("Gestion des tables");
+            modale.setScene(new Scene(root, 400, 300));
+            modale.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void openFreeTablesModal() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("freeTablesModalView.fxml"));
 
             Stage modale = new Stage();
             modale.initModality(Modality.APPLICATION_MODAL);
@@ -39,5 +58,12 @@ public class ManageTablesController {
         String tableName = assignTableId.getText();
         System.out.println("Valeur du champ est " + tableName);
         resultLabel.setText("Table assignée : " + tableName + " !");
+    }
+
+    @FXML
+    protected void freeTableSubmit() {
+        String tableName = freeTableId.getText();
+        System.out.println("Valeur du champ est " + tableName);
+        resultLabel.setText("Table libérée : " + tableName + " !");
     }
 }
