@@ -16,6 +16,9 @@ public class Finance extends Application {
     }
 
     public static void main(String[] args) {
+        Database db = new Database();
+        db.creationDb();
+        db.creationUtil("jean", "pierre","eds");
         launch();
     }
 }
