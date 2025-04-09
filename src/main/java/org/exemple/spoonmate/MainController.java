@@ -41,4 +41,9 @@ public class MainController {
     public void showRegister() throws IOException {
         loadPage("registerView.fxml");
     }
+
+    @FXML
+    public void showEmploye() throws IOException {
+        loadPage("employeView.fxml");
+    }
 }

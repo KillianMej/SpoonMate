@@ -1,9 +1,12 @@
 package org.exemple.spoonmate;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     static String url = "jdbc:sqlite:database.db";
+    Integer util_id = 1;
 
     public static void main(String[] args) {
     }
@@ -45,9 +48,11 @@ public class Database {
                 "CREATE TABLE IF NOT EXISTS `Employe` (\n" +
                 "\t`id` integer primary key NOT NULL UNIQUE,\n" +
                 "\t`restau_id` INTEGER NOT NULL,\n" +
+                "\t`util_id` INTEGER NOT NULL,\n" +
                 "\t`poste` TEXT NOT NULL,\n" +
                 "\t`date_naissance` REAL NOT NULL,\n" +
                 "FOREIGN KEY(`restau_id`) REFERENCES `Utilisateur`(`id`)\n" +
+                "FOREIGN KEY(`util_id`) REFERENCES `Utilisateur`(`id`)\n" +
                 ");\n" +
                 "CREATE TABLE IF NOT EXISTS `Crenaux` (\n" +
                 "\t`id` integer primary key NOT NULL UNIQUE,\n" +
@@ -90,6 +95,56 @@ public class Database {
     public void creationUtil(String nom, String email, String mdp){
         String sql = "INSERT INTO Utilisateur(nom,email,mdp,admin)" +
                 "Values('"+nom+"', '"+email+"', '"+mdp+"', 1)";
+        doQuery(sql);
+    }
+
+    public List<String> GetEmployes(){
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT u.id, u.nom, u.email FROM Employe as e INNER JOIN Utilisateur as u ON u.id = e.util_id WHERE e.restau_id = "+ util_id;
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String nom = rs.getString("nom");
+                String email = rs.getString("email");
+                list.add(id + ":" + nom + ":" + email);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void AjouterEmploye(String nom, String email, String mdp, String poste, String dateDeNaissance){
+        String sql = "INSERT INTO Utilisateur(nom, email, mdp) VALUES('"+nom+"','"+email+"','"+mdp+"');";
+        int id;
+
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                    String sqlEmplois = "INSERT INTO Employe(restau_id, util_id, poste, date_naissance) VALUES("+util_id+", "+id+",'"+poste+"','"+dateDeNaissance+"')";
+                    doQuery(sqlEmplois);
+                }
+                rs.close();
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void DeleteEmploye(Integer id){
+        String sql = "DELETE FROM Utilisateur WHERE id = " + id;
+        doQuery(sql);
+        sql = "DELETE FROM Employe WHERE util_id = " + id;
         doQuery(sql);
     }
 }

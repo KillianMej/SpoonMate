@@ -9,7 +9,7 @@ public class Finance extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(Finance.class.getResource("main.fxml"));
-        Scene scene = new Scene(loader.load(), 900, 600);
+        Scene scene = new Scene(loader.load(), 1280, 800);
         stage.setTitle("Application de Gestion");
         stage.setScene(scene);
         stage.show();
