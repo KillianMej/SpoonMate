@@ -12,31 +12,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <GridPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.exemple.spoonmate.LoginController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints fillHeight="false" maxHeight="1112.0" minHeight="10.0" prefHeight="960.4000106811524" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints fillHeight="false" maxHeight="1112.0" minHeight="10.0" prefHeight="960.4" valignment="CENTER" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="290.0" spacing="20.0" GridPane.halignment="CENTER">
-          <padding>
-              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-          </padding>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="290.0" GridPane.halignment="CENTER" spacing="15.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
          <children>
-            <Label text="Connexion">
-               <font>
-                  <Font size="44.0" />
-               </font>
-            </Label>
-            <TextField prefHeight="25.0" prefWidth="318.0" promptText="Email" />
-            <PasswordField promptText="Mot de passe" />
-            <HBox alignment="CENTER" spacing="100.0">
+            <Label text="Connexion" style="-fx-font-size: 44px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+            <Label fx:id="error" textAlignment="CENTER" textFill="RED" style="-fx-font-size: 14px;" />
+            <TextField fx:id="emailInput" prefHeight="25.0" prefWidth="318.0" promptText="Email" style="-fx-padding: 10px; -fx-font-size: 14px;"/>
+            <PasswordField fx:id="mdpInput" promptText="Mot de passe" style="-fx-padding: 10px; -fx-font-size: 14px;">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </PasswordField>
+            <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" text="S'inscrire" textOverrun="CLIP" />
-                  <Button mnemonicParsing="false" text="Se connecter" textOverrun="CLIP" />
+                  <Button mnemonicParsing="false" onAction="#Inscrire" text="S'inscrire" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-background-radius: 5px;" />
+                  <Button mnemonicParsing="false" onAction="#TryConnect" text="Se connecter" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-background-radius: 5px;" />
                </children>
             </HBox>
          </children>

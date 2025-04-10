@@ -4,58 +4,74 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="20" xmlns="http://javafx.com/javafx"
+<VBox spacing="15"
+      xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.exemple.spoonmate.DashboardController">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+      fx:controller="org.exemple.spoonmate.DashboardController"
+      style="-fx-background-color: #ecf0f1; -fx-padding: 20;">
 
-    <Label text="Tableau de Bord Administrateur" style="-fx-font-size: 18px; -fx-font-weight: bold"/>
+    <Label text="Tableau de Bord Administrateur"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
-    <HBox spacing="20">
-        <VBox spacing="10" prefWidth="300">
-            <Label text="Commandes servies (5 dernières)"/>
-            <ListView fx:id="servedOrdersList"/>
-        </VBox>
-
-        <VBox spacing="10" prefWidth="300">
-            <Label text="Commandes en attente"/>
-            <ListView fx:id="pendingOrdersList"/>
-        </VBox>
-    </HBox>
-
-    <TitledPane text="Statistiques">
-        <VBox spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <Label fx:id="employeeStatsLabel"/>
-            <Label fx:id="menuStatsLabel"/>
-        </VBox>
-    </TitledPane>
-
-    <TitledPane text="Recherche de plats par ingrédient">
-        <VBox spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
+    <!-- PLATS -->
+    <TitledPane text="Plats (Menu)" expanded="true"
+                style="-fx-font-size: 16px; -fx-font-weight: bold;">
+        <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-background-radius: 8;">
+            <Label fx:id="dishSummaryLabel" style="-fx-text-fill: #34495e;"/>
             <HBox spacing="10">
-                <TextField fx:id="ingredientField" promptText="Entrez un ingrédient"/>
-                <Button text="Rechercher" onAction="#onSearch"/>
+                <TextField fx:id="ingredientField"
+                           promptText="Rechercher par ingrédient"
+                           style="-fx-background-radius: 6; -fx-padding: 8;"/>
+                <Button text="Rechercher" onAction="#onSearch"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 6;"/>
             </HBox>
-            <ListView fx:id="searchResultList"/>
+            <Label text="Liste complète des plats :" style="-fx-font-weight: bold;"/>
+            <ListView fx:id="menuListView" prefHeight="100" style="-fx-background-radius: 6;"/>
+            <Label text="Détails du plat :" style="-fx-font-weight: bold;"/>
+            <TextArea fx:id="dishDetailArea"
+                      editable="false"
+                      wrapText="true"
+                      style="-fx-background-radius: 6;"/>
         </VBox>
     </TitledPane>
 
-    <HBox spacing="40">
-        <VBox spacing="10">
-            <Label text="Factures - clients encore présents"/>
-            <Label fx:id="currentClientsTotalLabel"/>
+    <!-- COMMANDES -->
+    <TitledPane text="Commandes" expanded="true"
+                style="-fx-font-size: 16px; -fx-font-weight: bold;">
+        <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-background-radius: 8;">
+            <HBox spacing="20">
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="Commandes en attente" style="-fx-font-weight: bold;"/>
+                    <ListView fx:id="pendingOrdersList" style="-fx-background-radius: 6;"/>
+                    <Button text="Marquer comme préparée" onAction="#onMarkPrepared"
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 6;"/>
+                </VBox>
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="Commandes préparées" style="-fx-font-weight: bold;"/>
+                    <ListView fx:id="preparedOrdersList" style="-fx-background-radius: 6;"/>
+                </VBox>
+            </HBox>
         </VBox>
-        <VBox spacing="10">
-            <Label text="Factures - clients partis"/>
-            <Label fx:id="leftClientsTotalLabel"/>
+    </TitledPane>
+
+    <!-- TABLES -->
+    <TitledPane text="Tables" expanded="false"
+                style="-fx-font-size: 16px; -fx-font-weight: bold;">
+        <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-background-radius: 8;">
+            <HBox spacing="20">
+                <VBox spacing="5" prefWidth="200">
+                    <Label text="Tables libres" style="-fx-font-weight: bold;"/>
+                    <ListView fx:id="freeTablesList" style="-fx-background-radius: 6;"/>
+                    <Button text="Occuper cette table" onAction="#onOccupyTable"
+                            style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-background-radius: 6;"/>
+                </VBox>
+                <VBox spacing="5" prefWidth="200">
+                    <Label text="Tables occupées" style="-fx-font-weight: bold;"/>
+                    <ListView fx:id="occupiedTablesList" style="-fx-background-radius: 6;"/>
+                    <Button text="Libérer cette table" onAction="#onFreeTable"
+                            style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-background-radius: 6;"/>
+                </VBox>
+            </HBox>
         </VBox>
-    </HBox>
+    </TitledPane>
 </VBox>

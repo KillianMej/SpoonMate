@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.exemple.spoonmate.CommandesController"
+            style="-fx-background-color: #ecf0f1;">
+
+    <top>
+        <Label text="Liste des Commandes"
+               BorderPane.alignment="CENTER"
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-padding: 20 0;"/>
+    </top>
+
+    <center>
+        <ScrollPane BorderPane.alignment="CENTER"
+                    fitToWidth="true"
+                    style="-fx-background-color: transparent; -fx-padding: 20;">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                    <children>
+                        <VBox fx:id="commandesBox" spacing="15"
+                              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);"/>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <Button text="Ajouter une commande"
+                onAction="#onAjouterCommande"
+                BorderPane.alignment="CENTER"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 20; -fx-margin: 20;"/>
+    </bottom>
+</BorderPane>

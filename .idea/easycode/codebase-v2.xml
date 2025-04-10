@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/src/main/java/org/exemple/spoonmate/DashboardController.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/Database.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/Finance.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/FinanceController.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/LoginApplication.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/LoginController.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/MainController.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/RegisterApplication.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/org/exemple/spoonmate/RegisterController.java;C:/Users/kmeja/IdeaProjects/SpoonMate/src/main/java/module-info.java" />
+  </component>
+</project>
