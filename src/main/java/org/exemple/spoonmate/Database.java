@@ -114,7 +114,7 @@ public class Database {
                 String platNom = rs.getString("plat_nom");
                 boolean prepared = rs.getBoolean("prepared");;
 
-                commandes.add(new CommandesController.Commande(platNom, tableNumero, prepared));
+                commandes.add(new CommandesController.Commande(id, restau, platNom, tableNumero, prepared));
             }
 
         } catch (SQLException e) {
@@ -123,11 +123,29 @@ public class Database {
         return commandes;
     }
 
-    public void ajouterCommande(int restauId, int tableId, int platId) {
+    public CommandesController.Commande ajouterCommande(int restauId, int tableId,String tablenom, int platId, String platnom) {
         String sql = "INSERT INTO Commande (restau_id, table_id, plat_id, prepared) VALUES (" +
                 restauId + ", " + tableId + ", " + platId + ", 0)";
-        doQuery(sql);
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // Exécuter la requête d'insertion
+            int rowsAffected = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
+            // Si la commande a été insérée avec succès, récupérer l'ID généré
+            if (rowsAffected > 0) {
+                ResultSet generatedKeys = stmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int commandeId = generatedKeys.getInt(1); // Récupérer l'ID généré
+                    // Créer et retourner un objet Commande
+                    return new CommandesController.Commande(commandeId, restauId, tablenom, platnom, false);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Retourner null en cas d'erreur
     }
+
 
     public List<AjouterCommandeController.Plat> getAllPlatByRestau(int restau) {
         List<AjouterCommandeController.Plat> plats = new ArrayList<>();

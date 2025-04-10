@@ -14,23 +14,28 @@ import java.util.List;
 
 public class CommandesController {
 
+    int restau = 1;
+
     @FXML
     private VBox commandesBox;
 
     public static class Commande {
         int id;
+        int restau;
         String plat;
         String table;
         boolean livree;
 
-        public Commande(String plat, String table, boolean livree) {
+        public Commande(int id, int restau, String plat, String table, boolean livree) {
+            this.id = id;
+            this.restau = restau;
             this.plat = plat;
             this.table = table;
             this.livree = livree;
         }
 
-        public Commande(String plat, String table) {
-            this(plat, table, false);
+        public Commande(int id, int restau, String plat, String table) {
+            this(id, restau, plat, table, false);
         }
     }
 
@@ -39,13 +44,14 @@ public class CommandesController {
     @FXML
     public void initialize() {
         Database db = new Database();
-        List<Commande> dbCommandes = db.getAllCommandesByRestau(1);
+        List<Commande> dbCommandes = db.getAllCommandesByRestau(restau);
 
         for (Commande commande : dbCommandes) {
+            int id = commande.id;
             String plat = "Plat " + commande.plat;
             String table = commande.table;
             Boolean livree = commande.livree;
-            commandes.add(new Commande(plat, table, livree));
+            commandes.add(new Commande(id, restau, plat, table, livree));
         }
 
 
@@ -92,8 +98,9 @@ public class CommandesController {
         }
     }
 
-    public void ajouterCommandeDepuisPopup(String plat, String table) {
-        commandes.add(new Commande(plat, table));
+    public void ajouterCommandeDepuisPopup(Commande commande) {
+        Database db = new Database();
+        commandes.add(commande);
         updateUI();
     }
 }

@@ -106,8 +106,7 @@ public class AjouterCommandeController {
 
             // Vérifiez que les IDs ont été trouvés
             if (platId != -1 && tableId != -1) {
-                db.ajouterCommande(1, tableId, platId); // Appel de la méthode ajouterCommande avec les bons paramètres
-                parentController.ajouterCommandeDepuisPopup(platNom, tableNom);
+                parentController.ajouterCommandeDepuisPopup(db.ajouterCommande(1, tableId,tableNom, platId, platNom));
                 ((Stage) platComboBox.getScene().getWindow()).close(); // Ferme la popup
             } else {
                 System.out.println("Erreur : Plat ou table non trouvée.");
