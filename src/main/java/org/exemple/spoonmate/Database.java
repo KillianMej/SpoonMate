@@ -17,6 +17,30 @@ public class Database {
     public static void main(String[] args) {
     }
 
+    public int getRestauByEmployeId(int employeId) {
+        String sql = "SELECT restau_id FROM Employe WHERE util_id = ?";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // On passe l'ID de l'employé en paramètre
+            stmt.setInt(1, employeId);
+
+            // Exécution de la requête et récupération du résultat
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("restau_id"); // Renvoie l'ID du restaurant
+            } else {
+                System.out.println("Employé non trouvé.");
+                return -1; // Si l'employé n'est pas trouvé, on renvoie -1
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // En cas d'erreur, renvoie -1
+        }
+    }
+
     public void creationDb() {
         String sql = "CREATE TABLE IF NOT EXISTS `Utilisateur` (\n" +
             "\t`id` integer primary key NOT NULL UNIQUE,\n" +
