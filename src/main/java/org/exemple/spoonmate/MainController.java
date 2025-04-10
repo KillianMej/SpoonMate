@@ -41,4 +41,8 @@ public class MainController {
     public void showRegister() throws IOException {
         loadPage("registerView.fxml");
     }
+
+    public void showTables() throws IOException {
+        loadPage("manageTablesView.fxml");
+    }
 }
