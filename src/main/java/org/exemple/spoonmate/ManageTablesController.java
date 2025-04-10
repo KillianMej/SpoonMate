@@ -117,8 +117,6 @@ public class ManageTablesController {
         int newTableNumber = lastTableNumber + 1;
 
         db.insertTable(1, newTableNumber, size, location, true);
-        System.out.println("Valeur du champ est " + locationName);
-        resultLabel.setText("Table à créer : numéro-secteur-places " + newTableNumber + " et " + locationName + " et " + sizeTable + " places." );
     }
 
     @FXML
