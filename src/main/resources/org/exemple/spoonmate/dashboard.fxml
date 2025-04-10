@@ -6,7 +6,8 @@
 
 <VBox spacing="15" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.exemple.spoonmate.DashboardController">
+      fx:controller="org.exemple.spoonmate.DashboardController"
+      stylesheets="@CSS/finance.css">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
