@@ -24,12 +24,9 @@
               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
           </padding>
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
+            <ToolBar prefHeight="37.0" prefWidth="170.0">
               <items>
-                <Button fx:id="assignTableBtn" mnemonicParsing="false" onAction="#openAssignTablesModal" text="Assigner" />
-                  <Button fx:id="freeTableBtn" mnemonicParsing="false" onAction="#openFreeTablesModal" text="Libérer" />
-                  <Button fx:id="createTableBtn" mnemonicParsing="false" onAction="#openCreateTablesModal" text="Enregistrer" />
-                  <Button fx:id="displayTableBtn" mnemonicParsing="false" onAction="#openDisplayTablesModal" text="Afficher" />
+                  <Button fx:id="createTableBtn" mnemonicParsing="false" onAction="#openCreateTablesModal" text="Enregistrer nouvelle table" />
               </items>
             </ToolBar>
              <Label>
