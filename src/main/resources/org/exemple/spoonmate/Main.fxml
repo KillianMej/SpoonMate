@@ -13,6 +13,7 @@
             <Button fx:id="dashboard" onAction="#showDashboard" text="Dashboard" />
             <Button fx:id="employe" mnemonicParsing="false" onAction="#showEmploye" text="Employe" />
             <Button fx:id="tables" onAction="#showTables" text="Tables" />
+            <Button text="Commandes" onAction="#showCommandes"/>
         </HBox>
     </top>
 

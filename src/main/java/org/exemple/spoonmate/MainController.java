@@ -68,6 +68,10 @@ public class MainController {
     }
 
     @FXML
+    public void showCommandes() throws IOException {
+        loadPage("commandes.fxml");
+    }
+    @FXML
     public void showEmploye() throws IOException {
         loadPage("employeView.fxml");
     }
