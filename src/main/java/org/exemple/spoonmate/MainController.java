@@ -29,9 +29,6 @@ public class MainController {
         employe.setVisible(db.admin);
         employe.setManaged(db.admin);
 
-        dashboard.setVisible(db.admin);
-        dashboard.setManaged(db.admin);
-
         fianances.setVisible(db.admin);
         fianances.setManaged(db.admin);
 
