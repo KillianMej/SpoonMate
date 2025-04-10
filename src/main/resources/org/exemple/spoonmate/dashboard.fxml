@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="20" xmlns="http://javafx.com/javafx"
+<VBox spacing="15" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.exemple.spoonmate.DashboardController">
     <padding>
@@ -13,49 +13,59 @@
 
     <Label text="Tableau de Bord Administrateur" style="-fx-font-size: 18px; -fx-font-weight: bold"/>
 
-    <HBox spacing="20">
-        <VBox spacing="10" prefWidth="300">
-            <Label text="Commandes servies (5 dernières)"/>
-            <ListView fx:id="servedOrdersList"/>
-        </VBox>
-
-        <VBox spacing="10" prefWidth="300">
-            <Label text="Commandes en attente"/>
-            <ListView fx:id="pendingOrdersList"/>
-        </VBox>
-    </HBox>
-
-    <TitledPane text="Statistiques">
+    <TitledPane text="Plats (Menu)" expanded="true">
         <VBox spacing="10">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <Label fx:id="employeeStatsLabel"/>
-            <Label fx:id="menuStatsLabel"/>
-        </VBox>
-    </TitledPane>
-
-    <TitledPane text="Recherche de plats par ingrédient">
-        <VBox spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
+            <Label fx:id="dishSummaryLabel"/>
             <HBox spacing="10">
-                <TextField fx:id="ingredientField" promptText="Entrez un ingrédient"/>
+                <TextField fx:id="ingredientField" promptText="Rechercher par ingrédient"/>
                 <Button text="Rechercher" onAction="#onSearch"/>
             </HBox>
-            <ListView fx:id="searchResultList"/>
+            <Label text="Liste complète des plats :"/>
+            <ListView fx:id="menuListView" prefHeight="100"/>
+            <Label text="Détails du plat :"/>
+            <TextArea fx:id="dishDetailArea" editable="false" wrapText="true"/>
         </VBox>
     </TitledPane>
 
-    <HBox spacing="40">
+    <TitledPane text="Commandes" expanded="true">
         <VBox spacing="10">
-            <Label text="Factures - clients encore présents"/>
-            <Label fx:id="currentClientsTotalLabel"/>
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox spacing="20">
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="Commandes en attente"/>
+                    <ListView fx:id="pendingOrdersList"/>
+                    <Button text="Marquer comme préparée" onAction="#onMarkPrepared"/>
+                </VBox>
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="Commandes préparées"/>
+                    <ListView fx:id="preparedOrdersList"/>
+                </VBox>
+            </HBox>
         </VBox>
+    </TitledPane>
+
+    <TitledPane text="Tables" expanded="false">
         <VBox spacing="10">
-            <Label text="Factures - clients partis"/>
-            <Label fx:id="leftClientsTotalLabel"/>
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox spacing="20">
+                <VBox spacing="5" prefWidth="200">
+                    <Label text="Tables libres"/>
+                    <ListView fx:id="freeTablesList"/>
+                    <Button text="Occuper cette table" onAction="#onOccupyTable"/>
+                </VBox>
+                <VBox spacing="5" prefWidth="200">
+                    <Label text="Tables occupées"/>
+                    <ListView fx:id="occupiedTablesList"/>
+                    <Button text="Libérer cette table" onAction="#onFreeTable"/>
+                </VBox>
+            </HBox>
         </VBox>
-    </HBox>
+    </TitledPane>
 </VBox>
