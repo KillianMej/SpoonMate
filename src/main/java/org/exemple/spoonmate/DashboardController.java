@@ -16,14 +16,14 @@ public class DashboardController {
     private ListView<String> searchResultList;
 
     @FXML
-    private ListView<Meal> menuListView;   // Assure-toi que l'ID est le même dans le FXML
+    private ListView<Meal> menuListView;
     @FXML
     private TextArea dishDetailArea;
 
     @FXML
-    private ListView<Order> pendingOrdersList;  // Désormais stocke des Order
+    private ListView<Order> pendingOrdersList; 
     @FXML
-    private ListView<Order> preparedOrdersList; // Idem
+    private ListView<Order> preparedOrdersList;
 
     @FXML
     private ListView<String> freeTablesList;
@@ -98,8 +98,7 @@ public class DashboardController {
     // Section Orders
     // ---------------
     private void loadOrders() {
-        // On s’appuie sur la liste orders déjà chargée
-        // On sépare en attente vs préparées
+
         List<Order> waiting = orders.stream()
                 .filter(o -> !o.prepared)
                 .collect(Collectors.toList());
@@ -113,18 +112,14 @@ public class DashboardController {
 
     @FXML
     protected void onMarkPrepared() {
-        // Récupérer la commande sélectionnée dans la liste "En attente"
         Order selectedOrder = pendingOrdersList.getSelectionModel().getSelectedItem();
         if (selectedOrder == null) return;
 
-        // Mettre à jour en base
         Database db = new Database();
         db.updateCommandeStatus(selectedOrder.id, true);
 
-        // Mettre à jour localement l'objet
         selectedOrder.prepared = true;
 
-        // Recharger l’affichage des commandes
         loadOrders();
     }
 
@@ -147,48 +142,38 @@ public class DashboardController {
 
     @FXML
     protected void onOccupyTable() {
-        // Sélectionne une table libre (ex. "Table 3")
         String selectedFreeTable = freeTablesList.getSelectionModel().getSelectedItem();
         if (selectedFreeTable == null) return;
 
         int tableNumber = extractTableNumber(selectedFreeTable);
 
-        // Mise à jour en base
         Database db = new Database();
         db.updateTableStatus(tableNumber, false);
 
-        // Mettre à jour localement :
         tables.stream()
                 .filter(t -> t.getTableNumber() == tableNumber)
                 .forEach(t -> t.setFree(false));
-
-        // Rafraîchir l’affichage
         loadTables();
     }
 
     @FXML
     protected void onFreeTable() {
-        // Sélectionne une table occupée (ex. "Table 2")
         String selectedOccupiedTable = occupiedTablesList.getSelectionModel().getSelectedItem();
         if (selectedOccupiedTable == null) return;
 
         int tableNumber = extractTableNumber(selectedOccupiedTable);
 
-        // Mise à jour en base
         Database db = new Database();
         db.updateTableStatus(tableNumber, true);
 
-        // Mettre à jour localement :
         tables.stream()
                 .filter(t -> t.getTableNumber() == tableNumber)
                 .forEach(t -> t.setFree(true));
 
-        // Rafraîchir l’affichage
         loadTables();
     }
 
     private int extractTableNumber(String label) {
-        // "Table 3" -> 3
         return Integer.parseInt(label.replace("Table ", "").trim());
     }
 
@@ -196,7 +181,7 @@ public class DashboardController {
     // Classes internes
     // -----------------
     public static class Order {
-        public int id;          // Identifiant unique de la commande
+        public int id;
         public String clientName;
         public String time;
         public boolean prepared;
@@ -209,7 +194,6 @@ public class DashboardController {
         }
         @Override
         public String toString() {
-            // Affichage dans la ListView
             return clientName + " - " + (prepared ? "Préparé" : "En attente") + " [" + time + "]";
         }
     }

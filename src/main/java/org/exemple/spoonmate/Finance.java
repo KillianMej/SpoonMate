@@ -30,7 +30,7 @@ public class Finance extends Application {
         db.insertTable(1, 3, 6, true);
 
 
-        db.insertCommande(1, 1, 1); // restau=1, table=1, plat=1
+        db.insertCommande(1, 1, 1);
         db.insertCommande(1, 1, 2);
         db.insertCommande(1, 2, 3);
 
