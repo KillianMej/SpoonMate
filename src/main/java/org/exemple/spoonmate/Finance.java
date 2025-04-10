@@ -21,6 +21,7 @@ public class Finance extends Application {
         db.creationDb();
         db.creationUtil("jean", "pierre","eds");
 
+
         db.insertPlat(1, "Burger", "Steak, pain, salade", 10, "burger.png");
         db.insertPlat(1, "Pizza", "Tomate, fromage, jambon", 12, "pizza.png");
         db.insertPlat(1, "Salade César", "Salade, poulet, sauce", 9, "cesar.png");
@@ -42,6 +43,7 @@ public class Finance extends Application {
         db.ajouterDepense(1, "Achat de matières premières", 500.0, "2023-10-01");
         db.ajouterDepense(1, "Salaire employé", 300.0, "2023-10-02");
         db.ajouterDepense(1, "Loyer", 250.0, "2023-10-03");
+
         launch();
     }
 }

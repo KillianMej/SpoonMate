@@ -403,6 +403,19 @@ public class Database {
         return plats;
     }
 
+
+    public void ajouterRecette(int restau_id, String desc, double montant, String date) {
+        String sql = "INSERT INTO Depenses_Recettes (restau_id, type, desc, montant, date) VALUES (" +
+                restau_id + ", 1, '" + desc + "', " + montant + ", '" + date + "')";
+        doQuery(sql);
+    }
+    
+    public void ajouterDepense(int restau_id, String desc, double montant, String date) {
+        String sql = "INSERT INTO Depenses_Recettes (restau_id, type, desc, montant, date) VALUES (" +
+                restau_id + ", 0, '" + desc + "', " + montant + ", '" + date + "')";
+        doQuery(sql);
+    }
+    
     public List<AjouterCommandeController.Table> getAllTableByRestau(int restau) {
         List<AjouterCommandeController.Table> tables = new ArrayList<>();
         String sql = "SELECT * FROM `Table` WHERE restau_id = " + restau;
