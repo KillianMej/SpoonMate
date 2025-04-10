@@ -117,6 +117,9 @@ public class ManageTablesController {
         int newTableNumber = lastTableNumber + 1;
 
         db.insertTable(1, newTableNumber, size, location, true);
+        Stage stage = (Stage) locationTableId.getScene().getWindow();
+        stage.close();
+
     }
 
     @FXML

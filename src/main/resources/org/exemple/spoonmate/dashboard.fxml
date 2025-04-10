@@ -14,7 +14,7 @@
            style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
     <!-- PLATS -->
-    <TitledPane text="Plats (Menu)" expanded="true"
+    <TitledPane text="Plats (Menu)" expanded="false"
                 style="-fx-font-size: 16px; -fx-font-weight: bold;">
         <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-background-radius: 8;">
             <Label fx:id="dishSummaryLabel" style="-fx-text-fill: #34495e;"/>
@@ -36,15 +36,13 @@
     </TitledPane>
 
     <!-- COMMANDES -->
-    <TitledPane text="Commandes" expanded="true"
+    <TitledPane text="Commandes" expanded="false"
                 style="-fx-font-size: 16px; -fx-font-weight: bold;">
         <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-background-radius: 8;">
             <HBox spacing="20">
                 <VBox spacing="5" prefWidth="250">
                     <Label text="Commandes en attente" style="-fx-font-weight: bold;"/>
                     <ListView fx:id="pendingOrdersList" style="-fx-background-radius: 6;"/>
-                    <Button text="Marquer comme préparée" onAction="#onMarkPrepared"
-                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 6;"/>
                 </VBox>
                 <VBox spacing="5" prefWidth="250">
                     <Label text="Commandes préparées" style="-fx-font-weight: bold;"/>

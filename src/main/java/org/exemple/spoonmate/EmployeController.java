@@ -94,6 +94,7 @@ public class EmployeController {
         Database db = new Database();
         db.DeleteEmploye(selectedEmploye.id);
         refreshEmployee();
+        refreshPointage();
     }
 
     public void pointer(){

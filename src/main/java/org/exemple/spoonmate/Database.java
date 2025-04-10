@@ -357,6 +357,8 @@ public class Database {
         doQuery(sql);
         sql = "DELETE FROM Employe WHERE util_id = " + id;
         doQuery(sql);
+        sql = "DELETE FROM Crenaux WHERE employe_id = " +id;
+        doQuery(sql);
     }
 
     public void Pointer(Integer id, Integer util_id){
