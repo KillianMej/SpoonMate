@@ -412,7 +412,7 @@ public class Database {
                 if (generatedKeys.next()) {
                     int commandeId = generatedKeys.getInt(1); // Récupérer l'ID généré
                     // Créer et retourner un objet Commande
-                    return new CommandesController.Commande(commandeId, restauId, tablenom, platnom, false);
+                    return new CommandesController.Commande(commandeId, restauId, platnom, tablenom, false);
                 }
             }
         } catch (SQLException e) {
