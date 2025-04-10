@@ -9,12 +9,10 @@
 
     <top>
         <HBox spacing="10" style="-fx-padding: 10; -fx-background-color: #eeeeee;">
-            <Button onAction="#showFinance" text="Finances" />
-            <Button onAction="#showDashboard" text="Dashboard" />
-            <Button onAction="#showLogin" text="LoginView" />
-            <Button onAction="#showRegister" text="RegisterView" />
-            <Button mnemonicParsing="false" onAction="#showEmploye" text="Employe" />
-            <Button text="Tables" onAction="#showTables"/>
+            <Button fx:id="fianances" onAction="#showFinance" text="Finances" />
+            <Button fx:id="dashboard" onAction="#showDashboard" text="Dashboard" />
+            <Button fx:id="employe" mnemonicParsing="false" onAction="#showEmploye" text="Employe" />
+            <Button fx:id="tables" onAction="#showTables" text="Tables" />
         </HBox>
     </top>
 

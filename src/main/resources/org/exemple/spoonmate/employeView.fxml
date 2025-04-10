@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox alignment="TOP_CENTER" prefWidth="1280.0" spacing="40" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.exemple.spoonmate.EmployeController">
 
@@ -25,6 +26,18 @@
     </VBox>
 
     <Region HBox.hgrow="ALWAYS" />
+   <VBox alignment="TOP_CENTER" prefWidth="400.0" spacing="10.0">
+      <children>
+         <Label text="Pointage des Employés">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+         </Label>
+         <ListView fx:id="listPoitage" prefWidth="200.0" />
+         <Button mnemonicParsing="false" onAction="#pointer" text="Pointer l'employé sélectionné" />
+      </children>
+   </VBox>
+   <Region HBox.hgrow="ALWAYS" />
 
     <!-- Formulaire d'ajout -->
     <VBox alignment="TOP_CENTER" prefWidth="300" spacing="10">
