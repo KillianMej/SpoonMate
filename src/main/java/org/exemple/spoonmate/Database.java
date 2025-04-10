@@ -223,6 +223,25 @@ public class Database {
     // ----------------------------------------
     // Méthodes pour mettre à jour une table
     // ----------------------------------------
+
+
+    public int getLastTableNumber() {
+        int lastNumber = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            String query = "SELECT MAX(numero) FROM  \"table\" WHERE restau_id = '1'";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                lastNumber = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lastNumber;
+    }
+
     public void updateTableStatus(int tableNumber, boolean isFree) {
         int freeValue = isFree ? 1 : 0;
         String sql = "UPDATE `Table` SET libre = " + freeValue + " WHERE numero = " + tableNumber;
