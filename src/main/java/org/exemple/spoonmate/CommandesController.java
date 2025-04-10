@@ -17,15 +17,20 @@ public class CommandesController {
     @FXML
     private VBox commandesBox;
 
-    private static class Commande {
+    public static class Commande {
+        int id;
         String plat;
         String table;
         boolean livree;
 
-        Commande(String plat, String table) {
+        public Commande(String plat, String table, boolean livree) {
             this.plat = plat;
             this.table = table;
-            this.livree = false;
+            this.livree = livree;
+        }
+
+        public Commande(String plat, String table) {
+            this(plat, table, false);
         }
     }
 
@@ -33,9 +38,16 @@ public class CommandesController {
 
     @FXML
     public void initialize() {
-        commandes.add(new Commande("Pizza Margherita", "Table 1"));
-        commandes.add(new Commande("Burger Veggie", "Table 2"));
-        commandes.add(new Commande("Salade César", "Table 3"));
+        Database db = new Database();
+        List<Commande> dbCommandes = db.getAllCommandesByRestau(1);
+
+        for (Commande commande : dbCommandes) {
+            String plat = "Plat " + commande.plat;
+            String table = commande.table;
+            Boolean livree = commande.livree;
+            commandes.add(new Commande(plat, table, livree));
+        }
+
 
         updateUI();
     }
@@ -51,7 +63,9 @@ public class CommandesController {
             Button livreeBtn = new Button("Marquer comme livrée");
 
             livreeBtn.setOnAction(e -> {
-                commande.livree = true;
+                commande.livree = !commande.livree;
+                Database db = new Database(); // ou singleton si besoin
+                db.updateCommandeStatus(commande.id,commande.livree);
                 updateUI();
             });
 
