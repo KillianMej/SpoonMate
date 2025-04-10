@@ -13,8 +13,9 @@
             <Button onAction="#showDashboard" text="Dashboard" />
             <Button onAction="#showLogin" text="LoginView" />
             <Button onAction="#showRegister" text="RegisterView" />
-         <Button mnemonicParsing="false" onAction="#showEmploye" text="Employe" />
-            </HBox>
+            <Button mnemonicParsing="false" onAction="#showEmploye" text="Employe" />
+            <Button text="Tables" onAction="#showTables"/>
+        </HBox>
     </top>
 
     <center>
