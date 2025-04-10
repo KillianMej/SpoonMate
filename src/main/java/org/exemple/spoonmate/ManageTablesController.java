@@ -108,8 +108,15 @@ public class ManageTablesController {
     protected void createTableSubmit() {
         String locationName = locationTableId.getText();
         String sizeTable = seatsAmountId.getText();
-        System.out.println("Valeur du champ est " + locationName);
-        resultLabel.setText("Table à créer : secteur " + locationName + " et " + sizeTable + " places." );
+        int size = Integer.parseInt(sizeTable);
+        int location = Integer.parseInt(locationName);
+
+        Database db = new Database();
+        // Obtenir le dernier numéro de table et incrémenter
+        int lastTableNumber = db.getLastTableNumber(); // à implémenter dans ta classe Database
+        int newTableNumber = lastTableNumber + 1;
+
+        db.insertTable(1, newTableNumber, size, location, true);
     }
 
     @FXML

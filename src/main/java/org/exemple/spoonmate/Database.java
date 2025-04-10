@@ -73,6 +73,7 @@ public class Database {
             "\t`restau_id` INTEGER NOT NULL,\n" +
             "\t`numero` INTEGER NOT NULL,\n" +
             "\t`taille` INTEGER NOT NULL,\n" +
+            "\t`emplacement` INTEGER NOT NULL DEFAULT 1,\n" +
             "\t`libre` REAL NOT NULL,\n" +
             "FOREIGN KEY(`restau_id`) REFERENCES `Utilisateur`(`id`)\n" +
             ");\n" +
@@ -168,10 +169,10 @@ public class Database {
         doQuery(sql);
     }
 
-    public void insertTable(int restauId, int numero, int taille, boolean libre) {
+    public void insertTable(int restauId, int numero, int taille, int emplacement, boolean libre) {
         int libreInt = libre ? 1 : 0;
-        String sql = "INSERT INTO `Table` (restau_id, numero, taille, libre) VALUES (" +
-                restauId + ", " + numero + ", " + taille + ", " + libreInt + ")";
+        String sql = "INSERT INTO `Table` (restau_id, numero, taille, emplacement, libre) VALUES (" +
+                restauId + ", " + numero + ", " + taille + ", " + emplacement + ", " + libreInt + ")";
         doQuery(sql);
     }
 
@@ -255,6 +256,25 @@ public class Database {
     // ----------------------------------------
     // Méthodes pour mettre à jour une table
     // ----------------------------------------
+
+
+    public int getLastTableNumber() {
+        int lastNumber = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            String query = "SELECT MAX(numero) FROM  \"table\" WHERE restau_id = '1'";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                lastNumber = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lastNumber;
+    }
+
     public void updateTableStatus(int tableNumber, boolean isFree) {
         int freeValue = isFree ? 1 : 0;
         String sql = "UPDATE `Table` SET libre = " + freeValue + " WHERE numero = " + tableNumber;
