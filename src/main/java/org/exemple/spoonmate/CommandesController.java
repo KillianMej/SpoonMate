@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandesController {
+    Database db = new Database();
 
-    int restau = 1;
+    int utilid = db.util_id;
+
+    int restau = db.admin ? utilid : db.getRestauByEmployeId(utilid);
 
     @FXML
     private VBox commandesBox;
