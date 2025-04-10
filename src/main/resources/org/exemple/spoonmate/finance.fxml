@@ -7,34 +7,35 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="15.0" xmlns="http://javafx.com/javafx"
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.exemple.spoonmate.FinanceController">
     <padding>
         <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
     </padding>
 
-    <Label fx:id="totalLabel"/>
+    <Label fx:id="totalLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
 
-    <TitledPane fx:id="recettePane" text="Recettes" expanded="false">
-    <ScrollPane fitToWidth="true" prefHeight="150">
-        <VBox fx:id="recetteBox" spacing="5">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-        </VBox>
-    </ScrollPane>
-</TitledPane>
+    <TitledPane fx:id="recettePane" text="Recettes" expanded="false" style="-fx-background-color: #ecf0f1; -fx-font-size: 16px;">
+        <ScrollPane fitToWidth="true" prefHeight="150">
+            <VBox fx:id="recetteBox" spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </TitledPane>
 
-<TitledPane fx:id="depensePane" text="Dépenses" expanded="false">
-    <ScrollPane fitToWidth="true" prefHeight="150">
-        <VBox fx:id="depenseBox" spacing="5">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-        </VBox>
-    </ScrollPane>
-</TitledPane>
+    <TitledPane fx:id="depensePane" text="Dépenses" expanded="false" style="-fx-background-color: #ecf0f1; -fx-font-size: 16px;">
+        <ScrollPane fitToWidth="true" prefHeight="150">
+            <VBox fx:id="depenseBox" spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </TitledPane>
 
-    <Button text="Exporter en PDF" onAction="#onExportPDF"/>
+    <Button text="Exporter en PDF" onAction="#onExportPDF"
+            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 6; -fx-padding: 10 20;"/>
 </VBox>

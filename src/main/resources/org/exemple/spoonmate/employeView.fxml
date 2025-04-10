@@ -10,30 +10,44 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox alignment="TOP_CENTER" prefWidth="1280.0" spacing="40" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.exemple.spoonmate.EmployeController">
+<HBox alignment="TOP_CENTER" prefWidth="1280.0" spacing="40"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.exemple.spoonmate.EmployeController">
 
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
     <!-- Liste des employés -->
-    <VBox alignment="TOP_CENTER" prefWidth="400" spacing="10">
-        <Label style="-fx-font-size: 16px; -fx-font-weight: bold" text="Liste des employés" />
-        <ListView fx:id="listEmploye" prefHeight="400" />
-        <Button onAction="#deleteEmploye" text="Supprimer l'employé sélectionné" />
+    <VBox alignment="TOP_CENTER" prefWidth="400" spacing="20">
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Liste des employés" />
+        <ListView fx:id="listEmploye" prefHeight="400" style="-fx-background-color: #f8f9fa; -fx-border-radius: 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 4);" />
+        <Button onAction="#deleteEmploye" text="Supprimer l'employé sélectionné" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6; -fx-padding: 10 20;"/>
+    </VBox>
+
+    <Region HBox.hgrow="ALWAYS" />
+
+    <!-- Pointage des employés -->
+    <VBox alignment="TOP_CENTER" prefWidth="400.0" spacing="20.0">
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Pointage des Employés" />
+        <ListView fx:id="listPoitage" prefWidth="200.0" style="-fx-background-color: #f8f9fa; -fx-border-radius: 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 4);" />
+        <Button mnemonicParsing="false" onAction="#pointer" text="Pointer l'employé sélectionné" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6; -fx-padding: 10 20;"/>
     </VBox>
 
     <Region HBox.hgrow="ALWAYS" />
 
     <!-- Formulaire d'ajout -->
-    <VBox alignment="TOP_CENTER" prefWidth="300" spacing="10">
-        <Label style="-fx-font-size: 16px; -fx-font-weight: bold" text="Ajouter un employé" />
-        <TextField fx:id="InputNom" promptText="Nom" />
-        <TextField fx:id="InputEmail" promptText="Email" />
-        <PasswordField fx:id="InputMdp" promptText="Mot de passe" />
-      <TextField fx:id="InputPoste" promptText="Poste" />
-      <DatePicker fx:id="DateNaissance" editable="false" promptText="Date de naissance" />
-        <Button onAction="#ajouterEmployee" text="Ajouter" />
+    <VBox alignment="TOP_CENTER" prefWidth="300" spacing="20">
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Ajouter un employé" />
+        <TextField fx:id="InputNom" promptText="Nom" style="-fx-background-color: #f8f9fa; -fx-border-radius: 6; -fx-padding: 10;" />
+        <TextField fx:id="InputEmail" promptText="Email" style="-fx-background-color: #f8f9fa; -fx-border-radius: 6; -fx-padding: 10;" />
+        <PasswordField fx:id="InputMdp" promptText="Mot de passe" style="-fx-background-color: #f8f9fa; -fx-border-radius: 6; -fx-padding: 10;" />
+        <TextField fx:id="InputPoste" promptText="Poste" style="-fx-background-color: #f8f9fa; -fx-border-radius: 6; -fx-padding: 10;" />
+        <DatePicker fx:id="DateNaissance" editable="false" promptText="Date de naissance" style="-fx-background-color: #f8f9fa; -fx-border-radius: 6; -fx-padding: 10;" />
+        <Button onAction="#ajouterEmployee" text="Ajouter" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6; -fx-padding: 10 20;"/>
     </VBox>
+
 </HBox>

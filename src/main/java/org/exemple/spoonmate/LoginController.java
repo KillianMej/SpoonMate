@@ -31,7 +31,7 @@ public class LoginController {
 
 
             Stage stage = (Stage) emailInput.getScene().getWindow();
-            stage.setScene(new Scene(root, 900, 600));
+            stage.setScene(new Scene(root, stage.getWidth(), stage.getHeight()));
             stage.show();
 
         }else {
@@ -44,7 +44,7 @@ public class LoginController {
         Parent root = loader.load();
 
         Stage stage = (Stage) emailInput.getScene().getWindow();
-        stage.setScene(new Scene(root, 900, 600));
+        stage.setScene(new Scene(root, stage.getWidth(), stage.getHeight()));
         stage.show();
     }
 
