@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Database {
     static String url = "jdbc:sqlite:database.db";
-    public Integer util_id;
+    public static Integer util_id;
     public static void main(String[] args) {
     }
 
