@@ -5,11 +5,11 @@ import java.util.*;
 
 public class Database {
     static String url = "jdbc:sqlite:database.db";
-
+    public Integer util_id;
     public static void main(String[] args) {
     }
 
-    public void creationDb(){
+    public void creationDb() {
         String sql = "CREATE TABLE IF NOT EXISTS `Utilisateur` (\n" +
             "\t`id` integer primary key NOT NULL UNIQUE,\n" +
             "\t`nom` TEXT NOT NULL,\n" +
@@ -81,18 +81,38 @@ public class Database {
         }
     }
 
-    private void doQuery(String sql){
-        try(Connection conn = DriverManager.getConnection(url); Statement stmt = conn.createStatement();){
+    private void doQuery(String sql) {
+        try (Connection conn = DriverManager.getConnection(url); Statement stmt = conn.createStatement();) {
             stmt.execute(sql);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void creationUtil(String nom, String email, String mdp){
+
+    public void creationUtil(String nom, String email, String mdp) {
         String sql = "INSERT INTO Utilisateur(nom,email,mdp,admin)" +
-                "Values('"+nom+"', '"+email+"', '"+mdp+"', 1)";
+                "Values('" + nom + "', '" + email + "', '" + mdp + "', 1)";
         doQuery(sql);
+    }
+
+    public Boolean tryConnectUtil(String email, String mdp) {
+        String sql = "SELECT * FROM Utilisateur WHERE email = '" + email + "' AND mdp = '" + mdp + "'";
+
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                util_id = rs.getInt("id");
+                return true;
+            }else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     public void ajouterRecette(int restau_id, String desc, double montant, String date) {
