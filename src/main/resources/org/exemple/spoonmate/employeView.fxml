@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="TOP_CENTER" prefWidth="1280.0" spacing="40" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.exemple.spoonmate.EmployeController">
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <!-- Liste des employés -->
+    <VBox alignment="TOP_CENTER" prefWidth="400" spacing="10">
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold" text="Liste des employés" />
+        <ListView fx:id="listEmploye" prefHeight="400" />
+        <Button onAction="#deleteEmploye" text="Supprimer l'employé sélectionné" />
+    </VBox>
+
+    <Region HBox.hgrow="ALWAYS" />
+   <VBox alignment="TOP_CENTER" prefWidth="400.0" spacing="10.0">
+      <children>
+         <Label text="Pointage des Employés">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+         </Label>
+         <ListView fx:id="listPoitage" prefWidth="200.0" />
+         <Button mnemonicParsing="false" onAction="#pointer" text="Pointer l'employé sélectionné" />
+      </children>
+   </VBox>
+   <Region HBox.hgrow="ALWAYS" />
+
+    <!-- Formulaire d'ajout -->
+    <VBox alignment="TOP_CENTER" prefWidth="300" spacing="10">
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold" text="Ajouter un employé" />
+        <TextField fx:id="InputNom" promptText="Nom" />
+        <TextField fx:id="InputEmail" promptText="Email" />
+        <PasswordField fx:id="InputMdp" promptText="Mot de passe" />
+      <TextField fx:id="InputPoste" promptText="Poste" />
+      <DatePicker fx:id="DateNaissance" editable="false" promptText="Date de naissance" />
+        <Button onAction="#ajouterEmployee" text="Ajouter" />
+    </VBox>
+</HBox>
