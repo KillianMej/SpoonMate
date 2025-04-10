@@ -2,154 +2,199 @@ package org.exemple.spoonmate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class DashboardController {
 
     @FXML
-    private ListView<String> servedOrdersList;
-
-    @FXML
-    private ListView<String> pendingOrdersList;
-
-    @FXML
-    private Label employeeStatsLabel;
-
-    @FXML
-    private Label menuStatsLabel;
+    private Label dishSummaryLabel;
 
     @FXML
     private TextField ingredientField;
-
     @FXML
     private ListView<String> searchResultList;
 
     @FXML
-    private Label currentClientsTotalLabel;
+    private ListView<Meal> menuListView;
+    @FXML
+    private TextArea dishDetailArea;
 
     @FXML
-    private Label leftClientsTotalLabel;
+    private ListView<Order> pendingOrdersList; 
+    @FXML
+    private ListView<Order> preparedOrdersList;
 
-    private List<Order> allOrders;
-    private List<Employee> employees;
+    @FXML
+    private ListView<String> freeTablesList;
+    @FXML
+    private ListView<String> occupiedTablesList;
+
     private List<Meal> menu;
-    private List<Bill> bills;
+    private List<Order> orders;
+    private List<RestaurantTable> tables;
 
     @FXML
     public void initialize() {
-        setupData();
+        Database db = new Database();
+
+        menu = db.getAllMeals();
+        orders = db.getAllOrders();
+        tables = db.getAllTables();
+
+        loadMenuSummary();
+        loadMenuList();
         loadOrders();
-        loadStats();
-        loadBills();
-    }
+        loadTables();
 
-    private void setupData() {
-        allOrders = List.of(
-                new Order("Alice", "12:30", true, true),
-                new Order("Bob", "12:35", true, true),
-                new Order("Chloe", "12:40", true, false),
-                new Order("David", "12:50", false, false),
-                new Order("Eve", "13:00", false, true),
-                new Order("Frank", "13:05", false, true),
-                new Order("Zoe", "13:10", false, false)
-        );
-
-        employees = List.of(
-                new Employee("Marie", 25),
-                new Employee("Jean", 31),
-                new Employee("Luc", 44),
-                new Employee("Nora", 47)
-        );
-
-        menu = List.of(
-                new Meal("Burger", 9.99, List.of("pain", "steak", "salade")),
-                new Meal("Salade César", 7.50, List.of("salade", "poulet", "croutons")),
-                new Meal("Entrecôte", 19.00, List.of("boeuf", "sel", "poivre")),
-                new Meal("Soupe", 5.00, List.of("carotte", "poireau", "eau"))
-        );
-
-        bills = List.of(
-                new Bill(34.50, true),
-                new Bill(21.90, true),
-                new Bill(58.30, false),
-                new Bill(15.20, false)
+        menuListView.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> showDishDetails(newVal)
         );
     }
 
-    private void loadOrders() {
-        List<String> served = allOrders.stream()
-                .filter(o -> o.served && o.clientPresent)
-                .sorted(Comparator.comparing(o -> o.time))
-                .map(o -> o.client + " à " + o.time)
-                .limit(5)
-                .collect(Collectors.toList());
+    // --------------------
+    // Section Menu (Plats)
+    // --------------------
+    private void loadMenuSummary() {
+        int totalDishes = menu.size();
+        Meal mostExpensive = menu.stream().max(Comparator.comparingDouble(m -> m.price)).orElse(null);
 
-        List<String> pending = allOrders.stream()
-                .filter(o -> !o.served)
-                .sorted(Comparator.comparing((Order o) -> o.client).thenComparing(o -> o.time))
-                .map(o -> o.client + " - " + o.time)
-                .collect(Collectors.toList());
-
-        servedOrdersList.getItems().setAll(served);
-        pendingOrdersList.getItems().setAll(pending);
+        String summary = "Total plats : " + totalDishes;
+        if (mostExpensive != null) {
+            summary += " | Plat le plus cher : " + mostExpensive.name
+                    + " (" + mostExpensive.price + "€)";
+        }
+        dishSummaryLabel.setText(summary);
     }
 
-    private void loadStats() {
-        long moins30 = employees.stream().filter(e -> e.age < 30).count();
-        long entre30et45 = employees.stream().filter(e -> e.age >= 30 && e.age <= 45).count();
-        long plus45 = employees.stream().filter(e -> e.age > 45).count();
-
-        employeeStatsLabel.setText("Employés : <30 ans = " + moins30 + ", 30-45 = " + entre30et45 + ", >45 = " + plus45);
-
-        Meal max = menu.stream().max(Comparator.comparingDouble(m -> m.price)).orElse(null);
-        Meal min = menu.stream().min(Comparator.comparingDouble(m -> m.price)).orElse(null);
-        double total = menu.stream().mapToDouble(m -> m.price).sum();
-
-        menuStatsLabel.setText("Plat le + cher : " + max.name + " (" + max.price + " €), le - cher : " + min.name + " (" + min.price + " €), valeur totale : " + total + " €");
+    private void loadMenuList() {
+        menuListView.getItems().setAll(menu);
     }
 
-    private void loadBills() {
-        double current = bills.stream().filter(b -> b.clientPresent).mapToDouble(b -> b.amount).sum();
-        double left = bills.stream().filter(b -> !b.clientPresent).mapToDouble(b -> b.amount).sum();
-
-        currentClientsTotalLabel.setText(current + " €");
-        leftClientsTotalLabel.setText(left + " €");
+    private void showDishDetails(Meal dish) {
+        if (dish == null) {
+            dishDetailArea.clear();
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nom : ").append(dish.name).append("\n")
+          .append("Prix : ").append(dish.price).append(" €\n")
+          .append("Ingrédients : ").append(dish.ingredients).append("\n");
+        dishDetailArea.setText(sb.toString());
     }
 
     @FXML
     protected void onSearch() {
         String query = ingredientField.getText().toLowerCase();
         List<String> results = menu.stream()
-                .filter(m -> m.ingredients.stream().anyMatch(i -> i.toLowerCase().contains(query)))
+                .filter(m -> m.ingredients.stream()
+                        .anyMatch(i -> i.toLowerCase().contains(query)))
                 .map(m -> m.name + " - " + m.price + " €")
                 .collect(Collectors.toList());
-
         searchResultList.getItems().setAll(results);
     }
 
-    public static class Order {
-        String client;
-        String time;
-        boolean served;
-        boolean clientPresent;
+    // ---------------
+    // Section Orders
+    // ---------------
+    private void loadOrders() {
 
-        public Order(String client, String time, boolean served, boolean clientPresent) {
-            this.client = client;
-            this.time = time;
-            this.served = served;
-            this.clientPresent = clientPresent;
-        }
+        List<Order> waiting = orders.stream()
+                .filter(o -> !o.prepared)
+                .collect(Collectors.toList());
+        pendingOrdersList.getItems().setAll(waiting);
+
+        List<Order> done = orders.stream()
+                .filter(o -> o.prepared)
+                .collect(Collectors.toList());
+        preparedOrdersList.getItems().setAll(done);
     }
 
-    public static class Employee {
-        String name;
-        int age;
+    @FXML
+    protected void onMarkPrepared() {
+        Order selectedOrder = pendingOrdersList.getSelectionModel().getSelectedItem();
+        if (selectedOrder == null) return;
 
-        public Employee(String name, int age) {
-            this.name = name;
-            this.age = age;
+        Database db = new Database();
+        db.updateCommandeStatus(selectedOrder.id, true);
+
+        selectedOrder.prepared = true;
+
+        loadOrders();
+    }
+
+    // ---------------
+    // Section Tables
+    // ---------------
+    private void loadTables() {
+        List<String> free = tables.stream()
+                .filter(RestaurantTable::isFree)
+                .map(t -> "Table " + t.getTableNumber())
+                .collect(Collectors.toList());
+        freeTablesList.getItems().setAll(free);
+
+        List<String> occupied = tables.stream()
+                .filter(t -> !t.isFree())
+                .map(t -> "Table " + t.getTableNumber())
+                .collect(Collectors.toList());
+        occupiedTablesList.getItems().setAll(occupied);
+    }
+
+    @FXML
+    protected void onOccupyTable() {
+        String selectedFreeTable = freeTablesList.getSelectionModel().getSelectedItem();
+        if (selectedFreeTable == null) return;
+
+        int tableNumber = extractTableNumber(selectedFreeTable);
+
+        Database db = new Database();
+        db.updateTableStatus(tableNumber, false);
+
+        tables.stream()
+                .filter(t -> t.getTableNumber() == tableNumber)
+                .forEach(t -> t.setFree(false));
+        loadTables();
+    }
+
+    @FXML
+    protected void onFreeTable() {
+        String selectedOccupiedTable = occupiedTablesList.getSelectionModel().getSelectedItem();
+        if (selectedOccupiedTable == null) return;
+
+        int tableNumber = extractTableNumber(selectedOccupiedTable);
+
+        Database db = new Database();
+        db.updateTableStatus(tableNumber, true);
+
+        tables.stream()
+                .filter(t -> t.getTableNumber() == tableNumber)
+                .forEach(t -> t.setFree(true));
+
+        loadTables();
+    }
+
+    private int extractTableNumber(String label) {
+        return Integer.parseInt(label.replace("Table ", "").trim());
+    }
+
+    // -----------------
+    // Classes internes
+    // -----------------
+    public static class Order {
+        public int id;
+        public String clientName;
+        public String time;
+        public boolean prepared;
+
+        public Order(String clientName, String time, boolean prepared, int id) {
+            this.clientName = clientName;
+            this.time = time;
+            this.prepared = prepared;
+            this.id = id;
+        }
+        @Override
+        public String toString() {
+            return clientName + " - " + (prepared ? "Préparé" : "En attente") + " [" + time + "]";
         }
     }
 
@@ -163,15 +208,31 @@ public class DashboardController {
             this.price = price;
             this.ingredients = ingredients;
         }
+        @Override
+        public String toString() {
+            return name + " (" + price + " €)";
+        }
     }
 
-    public static class Bill {
-        double amount;
-        boolean clientPresent;
+    public static class RestaurantTable {
+        private final int tableNumber;
+        private boolean free;
 
-        public Bill(double amount, boolean clientPresent) {
-            this.amount = amount;
-            this.clientPresent = clientPresent;
+        public RestaurantTable(int tableNumber, boolean free) {
+            this.tableNumber = tableNumber;
+            this.free = free;
+        }
+
+        public int getTableNumber() {
+            return tableNumber;
+        }
+
+        public boolean isFree() {
+            return free;
+        }
+
+        public void setFree(boolean free) {
+            this.free = free;
         }
     }
 }
