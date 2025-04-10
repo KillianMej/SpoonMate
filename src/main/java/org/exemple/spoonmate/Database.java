@@ -1,11 +1,15 @@
 package org.exemple.spoonmate;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.Date;
 
 public class Database {
     static String url = "jdbc:sqlite:database.db";
     public static Integer util_id;
+    public static Boolean admin = false;
     public static void main(String[] args) {
     }
 
@@ -106,6 +110,7 @@ public class Database {
 
             if (rs.next()){
                 util_id = rs.getInt("id");
+                admin = rs.getBoolean("admin");
                 return true;
             }else {
                 return false;
@@ -250,6 +255,34 @@ public class Database {
         }
     }
 
+    public List<String> GetEmployesPointage(){
+        LocalDateTime now = LocalDateTime.now();
+        String formattedDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT c.id, c.employe_id, u.nom, c.debut, c.fin FROM Employe as e INNER JOIN Crenaux as c ON c.employe_id = e.util_id INNER JOIN Utilisateur as u ON u.id = e.util_id WHERE e.restau_id = "+ util_id;
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String employe_id = rs.getString("employe_id");
+                String nom = rs.getString("nom");
+                String debut = rs.getString("debut");
+                String fin = rs.getString("fin");
+                if(Objects.equals(debut.split(" ")[0], formattedDate)){
+                    list.add(id + "#:" + employe_id + "#:" + nom + "#:" + debut + "#:" + fin);
+                }
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void AjouterEmploye(String nom, String email, String mdp, String poste, String dateDeNaissance){
         String sql = "INSERT INTO Utilisateur(nom, email, mdp) VALUES('"+nom+"','"+email+"','"+mdp+"');";
         int id;
@@ -275,6 +308,18 @@ public class Database {
         String sql = "DELETE FROM Utilisateur WHERE id = " + id;
         doQuery(sql);
         sql = "DELETE FROM Employe WHERE util_id = " + id;
+        doQuery(sql);
+    }
+
+    public void Pointer(Integer id, Integer util_id){
+        LocalDateTime now = LocalDateTime.now();
+        String formattedDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String sql;
+        if (id == 0){
+            sql = "INSERT INTO Crenaux(employe_id, debut, fin) VALUES("+util_id+", '"+formattedDate+"', 0)";
+        }else{
+            sql = "UPDATE Crenaux SET fin = '" + formattedDate + "' WHERE id = " + id;
+        }
         doQuery(sql);
     }
 }

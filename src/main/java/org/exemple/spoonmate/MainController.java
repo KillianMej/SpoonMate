@@ -2,6 +2,7 @@ package org.exemple.spoonmate;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 
@@ -13,8 +14,32 @@ public class MainController {
     private StackPane contentArea;
 
     @FXML
+    private Button employe;
+    @FXML
+    private Button dashboard;
+    @FXML
+    private Button fianances;
+    @FXML
+    private Button tables;
+
+
+    @FXML
     public void initialize() throws IOException {
-        showFinance();
+        Database db = new Database();
+        employe.setVisible(db.admin);
+        employe.setManaged(db.admin);
+
+        dashboard.setVisible(db.admin);
+        dashboard.setManaged(db.admin);
+
+        fianances.setVisible(db.admin);
+        fianances.setManaged(db.admin);
+
+        if (db.admin){
+            showDashboard();
+        }else{
+            showTables();
+        }
     }
 
     @FXML

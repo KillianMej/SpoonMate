@@ -8,9 +8,10 @@ import javafx.stage.Stage;
 public class Finance extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Finance.class.getResource("main.fxml"));
-        Scene scene = new Scene(loader.load(), 1280, 800);
+        FXMLLoader loader = new FXMLLoader(Finance.class.getResource("loginView.fxml"));
+        Scene scene = new Scene(loader.load(), 900, 600);
         stage.setTitle("Application de Gestion");
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
