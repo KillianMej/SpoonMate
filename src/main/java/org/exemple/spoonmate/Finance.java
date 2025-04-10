@@ -25,9 +25,9 @@ public class Finance extends Application {
         db.insertPlat(1, "Salade César", "Salade, poulet, sauce", 9, "cesar.png");
         db.insertPlat(1, "Soupe du Jour", "Carottes, poireau, pommes de terre", 5, "soupe.png");
 
-        db.insertTable(1, 1, 4, true);
-        db.insertTable(1, 2, 2, false);
-        db.insertTable(1, 3, 6, true);
+        db.insertTable(1, 1, 4, 3, true);
+        db.insertTable(1, 2, 2, 7, false);
+        db.insertTable(1, 3, 6, 8, true);
 
 
         db.insertCommande(1, 1, 1);
