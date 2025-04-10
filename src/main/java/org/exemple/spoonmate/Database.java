@@ -427,8 +427,4 @@ public class Database {
         return tables;
     }
 
-    public void updateCommandeStatus(int commandeId, boolean prepared) {
-        String sql = "UPDATE `Commande` SET prepared = " + prepared + " WHERE id = " + commandeId;
-        doQuery(sql);
-    }
 }
