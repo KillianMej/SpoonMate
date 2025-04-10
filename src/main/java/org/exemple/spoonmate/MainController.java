@@ -45,6 +45,7 @@ public class MainController {
     @FXML
     public void showEmploye() throws IOException {
         loadPage("employeView.fxml");
+    }
     
     @FXML
     public void showTables() throws IOException {
