@@ -39,11 +39,14 @@ public class EmployeController {
         Database db = new Database();
 
         List<String> employee = db.GetEmployes();
-        employee.stream()
-                .forEach(employe -> {
-                    String[] employeInfo = employe.split(":");
-                    listEmploye.getItems().add(new Employe(Integer.parseInt(employeInfo[0]), employeInfo[1], employeInfo[2]));
-                });
+        if(employee != null){
+            employee.stream()
+                    .forEach(employe -> {
+                        String[] employeInfo = employe.split(":");
+                        listEmploye.getItems().add(new Employe(Integer.parseInt(employeInfo[0]), employeInfo[1], employeInfo[2]));
+                    });
+
+        }
     }
 
     public void refreshPointage(){
@@ -51,22 +54,24 @@ public class EmployeController {
         Database db = new Database();
         List<String> employee = db.GetEmployes();
         List<String> pointages = db.GetEmployesPointage();
-        employee.stream().forEach(employe ->{
-            String[] employeInfo = employe.split(":");
-            Employe employeActuel = new Employe(Integer.parseInt(employeInfo[0]), employeInfo[1], employeInfo[2]);
-            AtomicBoolean insidePointageTable = new AtomicBoolean(false);
-            pointages.stream().forEach(pointage ->{
-                String[] pointageInfo = pointage.split("#:");
-                Pointage pointageActuel = new Pointage(Integer.parseInt(pointageInfo[0]), Integer.parseInt(pointageInfo[1]), pointageInfo[2], pointageInfo[3], pointageInfo[4]);
-                if (employeActuel.id == pointageActuel.util_id){
-                    insidePointageTable.set(true);
-                    listPoitage.getItems().add(new Pointage(pointageActuel.id, pointageActuel.util_id, pointageActuel.nom, pointageActuel.debut, pointageActuel.fin));
+        if (employee != null){
+            employee.stream().forEach(employe ->{
+                String[] employeInfo = employe.split(":");
+                Employe employeActuel = new Employe(Integer.parseInt(employeInfo[0]), employeInfo[1], employeInfo[2]);
+                AtomicBoolean insidePointageTable = new AtomicBoolean(false);
+                pointages.stream().forEach(pointage ->{
+                    String[] pointageInfo = pointage.split("#:");
+                    Pointage pointageActuel = new Pointage(Integer.parseInt(pointageInfo[0]), Integer.parseInt(pointageInfo[1]), pointageInfo[2], pointageInfo[3], pointageInfo[4]);
+                    if (employeActuel.id == pointageActuel.util_id){
+                        insidePointageTable.set(true);
+                        listPoitage.getItems().add(new Pointage(pointageActuel.id, pointageActuel.util_id, pointageActuel.nom, pointageActuel.debut, pointageActuel.fin));
+                    }
+                });
+                if (!insidePointageTable.get()){
+                    listPoitage.getItems().add(new Pointage(0, employeActuel.id, employeActuel.nom, "0.0", "0.0"));
                 }
             });
-            if (!insidePointageTable.get()){
-                listPoitage.getItems().add(new Pointage(0, employeActuel.id, employeActuel.nom, "0.0", "0.0"));
-            }
-        });
+        }
     }
 
     public void ajouterEmployee(){
