@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,7 +22,7 @@ public class CommandesController {
     int restau = db.admin ? utilid : db.getRestauByEmployeId(utilid);
 
     @FXML
-    private VBox commandesBox;
+    private FlowPane commandesBox;
 
     public static class Commande {
         int id;
@@ -70,16 +72,26 @@ public class CommandesController {
 
             Label label = new Label(texte);
             Button livreeBtn = new Button("Marquer comme livrée");
+            Button supprimerBtn = new Button("Supprimer");
 
             livreeBtn.setOnAction(e -> {
                 commande.livree = !commande.livree;
-                Database db = new Database(); // ou singleton si besoin
+                Database db = new Database();
                 db.updateCommandeStatus(commande.id,commande.livree);
                 updateUI();
             });
 
-            VBox commandeItem = new VBox(5, label, livreeBtn);
-            commandeItem.setStyle("-fx-padding: 10; -fx-border-color: lightgray; -fx-border-radius: 5;");
+            supprimerBtn.setOnAction(e -> {
+                Database db = new Database();
+                db.deleteCommande(commande.id);
+                commandes.remove(commande);
+                updateUI();
+            });
+
+            HBox boutonsBox = new HBox(10, livreeBtn, supprimerBtn);
+            VBox commandeItem = new VBox(5, label, boutonsBox);
+            commandeItem.setPrefWidth(275);
+            commandeItem.setStyle("-fx-padding: 10; -fx-border-color: lightgray; -fx-border-radius: 5; -fx-background-color: #f9f9f9;");
             commandesBox.getChildren().add(commandeItem);
         }
     }
