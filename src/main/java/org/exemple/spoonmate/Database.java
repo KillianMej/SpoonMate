@@ -244,18 +244,16 @@ public class Database {
         return orders;
     }
 
-    // ----------------------------------------
-    // Méthodes pour mettre à jour la commande
-    // ----------------------------------------
     public void updateCommandeStatus(int commandeId, boolean prepared) {
         int preparedValue = prepared ? 1 : 0;
         String sql = "UPDATE Commande SET prepared = " + preparedValue + " WHERE id = " + commandeId;
         doQuery(sql);
     }
 
-    // ----------------------------------------
-    // Méthodes pour mettre à jour une table
-    // ----------------------------------------
+    public void deleteCommande(int commandeId) {
+        String sql = "DELETE FROM Commande WHERE id = " + commandeId;
+        doQuery(sql);
+    }
 
 
     public int getLastTableNumber() {
