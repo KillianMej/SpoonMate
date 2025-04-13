@@ -42,7 +42,7 @@ public class Database {
             "\t`numero` INTEGER NOT NULL,\n" +
             "\t`taille` INTEGER NOT NULL,\n" +
             "\t`emplacement` INTEGER NOT NULL DEFAULT 1,\n" +
-            "\t`libre` REAL NOT NULL,\n" +
+            "\t`libre` BOOLEAN,\n" +
             "FOREIGN KEY(`restau_id`) REFERENCES `Utilisateur`(`id`)\n" +
             ");\n" +
             "CREATE TABLE IF NOT EXISTS `Employe` (\n" +
