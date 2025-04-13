@@ -1,57 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.exemple.spoonmate.ManageTablesController">
-   <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints vgrow="ALWAYS" />
-   </rowConstraints>
-   <children>
-      <VBox alignment="CENTER"
-            spacing="20.0"
-            prefHeight="800.0"
-            prefWidth="1000.0"
-            GridPane.halignment="CENTER"
-            GridPane.valignment="CENTER"
-            GridPane.vgrow="ALWAYS"
-            GridPane.hgrow="ALWAYS">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-         <children>
-            <Label text="Afficher tables libres">
-               <font>
-                  <Font size="44.0" />
-               </font>
-            </Label>
-            <ListView fx:id="freeTableListing"
-                      prefHeight="1000.0"
-                      prefWidth="800.0"
-                      VBox.vgrow="ALWAYS"
-                      style="-fx-border-color: red; -fx-border-width: 2;" />
-            <HBox alignment="CENTER" spacing="100.0">
-               <children>
-                  <Button fx:id="displayTableSubmitBtn" mnemonicParsing="false" onAction="#displayTableSubmit" text="Valider" textOverrun="CLIP" />
-               </children>
-            </HBox>
-            <Label fx:id="resultLabel" prefHeight="91.0" prefWidth="800.0">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-   </children>
-</GridPane>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.exemple.spoonmate.ManageTablesController"
+      alignment="CENTER"
+      spacing="20"
+      prefWidth="800"
+      prefHeight="600"
+      style="-fx-padding: 40;">
+
+   <Label text="Afficher tables libres" style="-fx-font-size: 32;" />
+
+   <ListView fx:id="freeTableListing"
+             prefHeight="300"
+             prefWidth="600"
+             style="-fx-border-color: red;" />
+
+   <Button fx:id="displayTableSubmitBtn"
+           text="Valider"
+           onAction="#displayTableSubmit" />
+
+   <Label fx:id="resultLabel" style="-fx-font-size: 20;" />
+
+</VBox>
